@@ -14,19 +14,25 @@ Example:
 */
 
 //  get input values and splice removes unuseful data
-let time = process.argv.splice(2);
+const time = process.argv.splice(2);
 
 //  loop throught timer values
 for (let i = 0; i < time.length; i++) {
   //  check if value is a positive number
-  if (time[i] > 0) {
+  if (time[i] > 0 && !isNaN(time[i])) {
     setTimeout(() => {
       //  timer beep output
       process.stdout.write('\x07');
       //  current timer ouput
-      process.stdout.write(`\r${time[i]}   `);
+      process.stdout.write(`\r${Number(time[i])}   `);
   
     }, time[i] * 1000);
   }
   
 }
+/*  Notes:
+          - !isNaN() to check if number (done)
+          - using Number(time[i]) to force number at write (done)
+          - could make the entire if statement contents into a function and call that
+          - should refactor the for loop into for-each
+*/
